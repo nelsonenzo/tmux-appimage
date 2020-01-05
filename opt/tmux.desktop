@@ -1,0 +1,9 @@
+[Desktop Entry]
+X-AppImage-Name=tmux
+X-AppImage-Version=1.0.0
+X-AppImage-Arch=x86_64
+Name=Tmux
+Exec=tmux
+Icon=tmux-logo-square
+Type=Application
+Categories=Utility;
