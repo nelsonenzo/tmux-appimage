@@ -1,0 +1,11 @@
+## Fetch the latest release.
+RUN apt-get install -y wget jq
+RUN wget -qO- https://api.github.com/repos/tmux/tmux/releases/latest \
+          | jq -r ".assets[].browser_download_url" \
+          | wget -qi - \
+          && tar -xf tmux*.tar.gz \
+          && rm tmux*.tar.gz \
+          && mv tmux-* tmux
+
+opt/build.sh
+RELEASE_TAG=$(git rev-parse --short master)
