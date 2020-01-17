@@ -1,14 +1,17 @@
 ## Author: Nelson E Hernandez
 ## Date:
-FROM debian:latest
+FROM centos:centos6.9
 ## install build tools
-RUN apt-get update && apt-get install -y autotools-dev automake git build-essential wget fuse file
+RUN /usr/bin/yum groupinstall -y "Development Tools"
+RUN /usr/bin/yum install -y wget
 
-RUN wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage && \
-    chmod +x linuxdeploy-x86_64.AppImage && mv linuxdeploy-x86_64.AppImage /usr/bin/linuxdeploy
+RUN wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage \
+    && chmod +x linuxdeploy-x86_64.AppImage \
+    && ./linuxdeploy-x86_64.AppImage --appimage-extract \
+    && ln -nfs /squashfs-root/usr/bin/linuxdeploy /usr/bin/linuxdeploy
 
 ## install tmux specific packages
-RUN apt-get install -y libevent-dev libncurses5-dev libncursesw5-dev bison byacc pkg-config
+RUN yum install -y libevent2-devel.x86_64 ncurses-devel
 
 ## Change RELEASE_TAG to desired version/git sha
 ENV RELEASE_TAG=3.0a
