@@ -17,18 +17,17 @@ git clone https://github.com/nelsonenzo/tmux-appimage.git
 ## compile tmux from source by building container
 docker build . -t tmux
 
-## make appimage by running container
-docker run -it -v "$PWD"/opt:/opt tmux
-
-## expected output:
-./opt/releases/tmux-3.0a-x86_64.AppImage
+## extract the appimage file
+docker create -ti --name tmuxcontainer tmux bash
+docker cp tmuxcontainer:/opt/releases/tmux-3.0a-x86_64.AppImage .
+docker rm -f tmuxcontainer
 ```
 
 
 ## To use AppImage
 move appimage to executable location in your $PATH
 ```
-mv ./opt/releases/tmux.*AppImage /usr/bin/tmux
+mv tmux.*AppImage /usr/local/bin/tmux
 
 tmux
 ```
