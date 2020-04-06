@@ -1,0 +1,8 @@
+{
+"tag_name": "drone",
+"target_commitish": "drone",
+"name": "Tmux AppImage 3.0a drone",
+"body": "Appimage release for branch drone",
+"draft": true,
+"prerelease": true
+}
