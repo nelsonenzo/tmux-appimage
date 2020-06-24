@@ -1,0 +1,74 @@
+kind: pipeline
+name: default
+
+steps:
+## builds and pushes to hub.docker.com, the docker repo is just private right now.
+- name: docker build
+  image: plugins/docker
+  settings:
+    username:
+      from_secret: docker_username
+    password:
+      from_secret: docker_password
+    repo: nelsonenzo/tmux-appimage
+    tags: build-${DRONE_COMMIT}
+
+- name: copy artifact to s3
+  image: nelsonenzo/tmux-appimage:build-${DRONE_COMMIT}
+  commands:
+    export AWS_ACCESS_KEY_ID=$${aws_access_key_id}
+    export AWS_ACCESS_SECRET_KEY=$${aws_access_secret_key}
+    aws s3 cp /opt/releases/tmux-3.0a-x86_64.AppImage tmux-appimage/${DRONE_COMMIT}/tmux-3.0a-x86_64.AppImage
+
+# copy the image to s3://tmux-appimage-builds/build-id/appimage
+  ## requires IAM key for S3
+  ## change to update.sh script to pull Appimage from S3
+    ## how to identify the build id in userdata or tags?
+# - name: terraform test environment
+#   terraform:
+#     image: jmccann/drone-terraform:1
+#     plan: false
+#     root_dir: terraform
+
+# terraform build 5 instances
+# run tests
+# if successful && branch == master
+  ## publish to github
+  ## push to s3/latest with zsync file.
+  ## destroy instances
+# if fail
+  ## output command to ssh
+
+
+# COMMENTING FOR NOW. THIS WORKS THOUGH. DO NOT DELETE.
+# - name: create release on github
+#   image: nelsonenzo/tmux-appimage:692f3cf549ebbb95b5111845dc9f92a202e8d9a8
+#   environment:
+#     FILE: /opt/releases/tmux-3.0a-x86_64.AppImage
+#     GITHUB_TOKEN:
+#       from_secret: personal_access_token
+#   commands:
+#     - |
+#       cat > github.json <<- EOM
+#       {
+#       "tag_name": "${DRONE_REPO_BRANCH}",
+#       "target_commitish": "${DRONE_REPO_BRANCH}",
+#       "name": "Tmux AppImage $RELEASE_TAG ${DRONE_REPO_BRANCH}",
+#       "body": "Appimage release for branch ${DRONE_REPO_BRANCH}",
+#       "draft": true,
+#       "prerelease": true
+#       }
+#       EOM
+#     - echo $(cat github.json)
+#     - |
+#       curl -X POST -d @github.json \
+#       -H "Authorization: token $${GITHUB_TOKEN}" \
+#       https://api.github.com/repos/nelsonenzo/tmux-appimage/releases > githubresponse.txt
+#     - echo $(cat githubresponse.txt)
+#     - export GITHUB_RELEASE_ID=$(jq .id githubresponse.txt)
+#     - echo $GITHUB_RELEASE_ID
+#     - |
+#       curl -H "Authorization: token $${GITHUB_TOKEN}" \
+#       -H "Content-Type: $(file -b --mime-type $FILE)" \
+#       --data-binary @$FILE \
+#       "https://uploads.github.com/repos/nelsonenzo/tmux-appimage/releases/$GITHUB_RELEASE_ID/assets?name=$(basename $FILE)"
