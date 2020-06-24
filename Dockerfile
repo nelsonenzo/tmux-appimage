@@ -14,7 +14,7 @@ RUN wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous
 RUN yum install -y libevent2-devel.x86_64 ncurses-devel
 
 ## Change RELEASE_TAG to desired version/git sha
-ENV RELEASE_TAG=3.1b
+ENV RELEASE_TAG=3.1a
 RUN git clone https://github.com/tmux/tmux.git && cd tmux && git checkout $RELEASE_TAG
 
 WORKDIR /tmux
