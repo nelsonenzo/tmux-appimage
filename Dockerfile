@@ -15,7 +15,7 @@ RUN yum install -y libevent-devel-2.0.21-4.el7.x86_64.rpm
 RUN yum install -y ncurses-devel
 
 ## Change RELEASE_TAG to desired version/git sha
-ENV RELEASE_TAG=3.1c
+ENV RELEASE_TAG=3.2
 RUN git clone -b $RELEASE_TAG --depth 1 https://github.com/tmux/tmux.git
 
 WORKDIR /tmux
@@ -29,6 +29,6 @@ COPY ./opt /opt
 RUN /opt/build.sh
 
 ## Produces artifact
-## /opt/releases/tmux-3.0c-x86_64.AppImage
+## /opt/releases/tmux-3.2-x86_64.AppImage
 
 CMD /opt/build.sh

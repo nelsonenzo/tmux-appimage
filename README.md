@@ -19,7 +19,7 @@ docker build . -t tmux
 
 ## extract the appimage file
 docker create -ti --name tmuxcontainer tmux bash
-docker cp tmuxcontainer:/opt/releases/tmux-3.1c-x86_64.AppImage .
+docker cp tmuxcontainer:/opt/releases/tmux-3.2-x86_64.AppImage .
 docker rm -f tmuxcontainer
 ```
 
