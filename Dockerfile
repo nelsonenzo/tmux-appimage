@@ -29,6 +29,6 @@ COPY ./opt /opt
 RUN /opt/build.sh
 
 ## Produces artifact
-## /opt/releases/tmux-3.0c-x86_64.AppImage
+## /opt/releases/tmux-3.2-x86_64.AppImage
 
 CMD /opt/build.sh
