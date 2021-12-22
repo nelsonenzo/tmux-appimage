@@ -14,6 +14,9 @@ The advantages to doing it this way are:
 ## clone me
 git clone https://github.com/nelsonenzo/tmux-appimage.git
 
+## change directory
+cd tmux-appimage
+
 ## compile tmux from source by building container
 docker build . -t tmux  
 
