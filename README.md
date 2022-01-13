@@ -18,11 +18,13 @@ git clone https://github.com/nelsonenzo/tmux-appimage.git
 cd tmux-appimage
 
 ## compile tmux from source by building container
-docker build . -t tmux  
+export TMUX_RELEASE_TAG=3.2a
+
+docker build . -t tmux --build-arg tmux_release_tag=$TMUX_RELEASE_TAG 
 
 ## extract the appimage file
 docker create -ti --name tmuxcontainer tmux bash
-docker cp tmuxcontainer:/opt/releases/tmux-3.1c-x86_64.AppImage .
+docker cp tmuxcontainer:/opt/releases/tmux-$TMUX_RELEASE_TAG-x86_64.AppImage .
 docker rm -f tmuxcontainer
 ```
 

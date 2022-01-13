@@ -14,8 +14,9 @@ RUN wget http://mirror.centos.org/centos/7/os/x86_64/Packages/libevent-devel-2.0
 RUN yum install -y libevent-devel-2.0.21-4.el7.x86_64.rpm
 RUN yum install -y ncurses-devel
 
-## Change RELEASE_TAG to desired version/git sha
-ENV RELEASE_TAG=3.1c
+## Use --build-arg tmux_release_tag=3.2a to use a specific release version
+ARG tmux_release_tag=master
+ENV RELEASE_TAG=$tmux_release_tag
 RUN git clone -b $RELEASE_TAG --depth 1 https://github.com/tmux/tmux.git
 
 WORKDIR /tmux
