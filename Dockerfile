@@ -56,6 +56,7 @@ RUN chmod 755 $BUILD_DIR/AppDir/AppRun
 ADD tmux.desktop $BUILD_DIR/AppDir/tmux.desktop
 RUN convert "$REPO_ROOT/logo/favicon.ico" "$REPO_ROOT/logo/favicon.png" && \
     cp "$REPO_ROOT/logo/favicon-1.png" "$BUILD_DIR/AppDir/favicon.png"
+ENV UPDATE_INFORMATION="gh-releases-zsync|nelsonenzo|tmux-appimage|latest|tmux.appimage.zsync"
 
 WORKDIR $BUILD_DIR
 RUN OUTPUT="tmux.appimage" /usr/bin/linuxdeploy --appdir ./AppDir --output appimage \
