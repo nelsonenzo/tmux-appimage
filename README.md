@@ -1,5 +1,5 @@
 # Tmux AppImage
-One-liner to get the latest Appimage build:
+One-liner to get the latest tmux.appimage build:
 ```
 curl -s https://api.github.com/repos/nelsonenzo/tmux-appimage/releases/latest \
 | grep "browser_download_url.*appimage" \
@@ -8,44 +8,36 @@ curl -s https://api.github.com/repos/nelsonenzo/tmux-appimage/releases/latest \
 | wget -qi - \
 && chmod +x tmux.appimage
 
+## optionaly, move it into your $PATH
+mv tmux.appimage /usr/local/bin/tmux
+tmux
 ```
-
 ### What is this?
-Dockerfile to create an AppImage of tmux.
+A Docker build of Tmux Appimage
 
 ### Why use Docker?
-The advantages to doing it this way are:
+The advantages of using docker:
 - Obtain consistent build results on any computer.
 - No need to install a slew of build packages on your own machine.
 - You can trust the tmux developers code, not some rando's AppImage distribution on the interwebz :p
 
-### How do build it yourself?
+### Build it yourself from source code
 I assume you have docker installed already.
 ```
-## clone me
+#### clone me & change directory
 git clone https://github.com/nelsonenzo/tmux-appimage.git
-
-## change directory
 cd tmux-appimage
 
-## Set the desired tmux release tag and build
+#### Set the desired tmux release tag and build
 export TMUX_RELEASE_TAG=3.2a
-
 docker build . -t tmux --build-arg TMUX_RELEASE_TAG=$TMUX_RELEASE_TAG 
 
-## extract the appimage file
+#### extract the appimage file
 docker create -ti --name tmuxcontainer tmux bash
 docker cp tmuxcontainer:/opt/build/tmux.appimage .
 docker rm -f tmuxcontainer
-```
 
-
-## To use AppImage
-move appimage to executable location in your $PATH
-```
-mv tmux.appimage /usr/local/bin/tmux
-
-tmux
+ls -al tmux.appimage
 ```
 
 ### Where has the AppImage been tested to turn?
