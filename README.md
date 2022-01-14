@@ -50,11 +50,9 @@ centos 7
 centos 8
 fedora 33
 ```
-The distributed build will not work on older os's, since they have older glibc libraries.
-If you need it to work on those systems, try modifying the Dockerfile to use an older ubuntu as the base image and building.
-```
-centos 6
-```
+The distributed build will not work on old os's (like Centos 6), since they have older glibc libraries.
+If you need it to work on those systems, try modifying the Dockerfile to use an older ubuntu as the base image and doing a docker build.
+
 ### What is the sauce that makes this work?
 The [Dockerfile](Dockerfile) contains all the magic ingredients to compile tmux.
 
