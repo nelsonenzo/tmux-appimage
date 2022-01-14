@@ -20,7 +20,7 @@ cd tmux-appimage
 ## compile tmux from source by building container
 export TMUX_RELEASE_TAG=3.2a
 
-docker build . -t tmux --build-arg tmux_release_tag=$TMUX_RELEASE_TAG 
+docker build . -t tmux --build-arg TMUX_RELEASE_TAG=$TMUX_RELEASE_TAG 
 
 ## extract the appimage file
 docker create -ti --name tmuxcontainer tmux bash
@@ -41,6 +41,7 @@ tmux
 It has been tested on these fine Linux platforms and will likely work for anything newer than centos 6.9 (which is a few years old now.) Please file an issue if you find otherwise or need support on a different platform.
 ```
 ubuntu 18
+manjaro 19.02 Arch_x64
 centos 6.9
 centos 7.6
 fedora 31
