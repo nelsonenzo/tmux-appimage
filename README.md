@@ -24,7 +24,7 @@ docker build . -t tmux --build-arg tmux_release_tag=$TMUX_RELEASE_TAG
 
 ## extract the appimage file
 docker create -ti --name tmuxcontainer tmux bash
-docker cp tmuxcontainer:/opt/releases/tmux-$TMUX_RELEASE_TAG-x86_64.AppImage .
+docker cp tmuxcontainer:/opt/build/tmux.appimage .
 docker rm -f tmuxcontainer
 ```
 
@@ -32,7 +32,7 @@ docker rm -f tmuxcontainer
 ## To use AppImage
 move appimage to executable location in your $PATH
 ```
-mv tmux.*AppImage /usr/local/bin/tmux
+mv tmux.appimage /usr/local/bin/tmux
 
 tmux
 ```
@@ -49,4 +49,4 @@ fedora 31
 ### What is the sauce that makes this work?
 The [Dockerfile](Dockerfile) contains all the magic ingredients to compile tmux.
 
-[./opt/build.sh](opt/build.sh) creates the AppImage from binary using linuxdeploy tool.
+Huge thank you to https://github.com/michaellee8, whom taught me a lot about appimage builds with his code contributions.
