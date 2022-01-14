@@ -1,4 +1,4 @@
 #!/bin/bash
-HERE="$(dirname "$(readlink -f "${0}")")"
 unset ARGV0
-exec "${HERE}/usr/bin/tmux" "$@"
+export TERMINFO=$APPDIR/usr/share/terminfo
+exec "$(dirname "$(readlink  -f "${0}")")/usr/bin/tmux" ${@+"$@"}
