@@ -1,6 +1,4 @@
-opt/releases/*
 localnotes/*
-dronesecrets.txt
 .terraform
 terraform/notes.md
 terraform.tfstate
