@@ -43,13 +43,18 @@ ls -al tmux.appimage
 ### Where has the AppImage been tested to turn?
 It has been tested on these fine Linux platforms and will likely work for anything newer than centos 6.9 (which is a few years old now.) Please file an issue if you find otherwise or need support on a different platform.
 ```
-ubuntu 18
-manjaro 19.02 Arch_x64
-centos 6.9
-centos 7.6
-fedora 31
+ubuntu 18.04
+ubuntu 16.04
+manjaro 19.02
+centos 7
+centos 8
+fedora 33
 ```
-
+The distributed build will not work on older os's, since they have older glibc libraries.
+If you need it to work on those systems, try modifying the Dockerfile to use an older ubuntu as the base image and building.
+```
+centos 6
+```
 ### What is the sauce that makes this work?
 The [Dockerfile](Dockerfile) contains all the magic ingredients to compile tmux.
 
