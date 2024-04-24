@@ -1,6 +1,6 @@
 #!/bin/sh
 
-export TMUX_RELEASE_TAG=3.3a
+export TMUX_RELEASE_TAG=3.4
 docker build . -t tmux --build-arg TMUX_RELEASE_TAG=$TMUX_RELEASE_TAG
 
 docker rm -f tmuxcontainer
