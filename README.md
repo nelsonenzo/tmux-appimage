@@ -29,7 +29,7 @@ git clone https://github.com/nelsonenzo/tmux-appimage.git
 cd tmux-appimage
 
 #### Set the desired tmux release tag and build
-export TMUX_RELEASE_TAG=3.2a
+export TMUX_RELEASE_TAG=3.5a
 docker build . -t tmux --build-arg TMUX_RELEASE_TAG=$TMUX_RELEASE_TAG 
 
 #### extract the appimage file
