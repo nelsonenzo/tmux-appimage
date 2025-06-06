@@ -47,7 +47,7 @@ RUN sh autogen.sh
 ENV CPPFLAGS="-I$BUILD_DIR/AppDir/usr/include -I$BUILD_DIR/AppDir/usr/include/ncurses"
 ENV LDFLAGS="-L$BUILD_DIR/AppDir/usr/lib"
 ENV PKG_CONFIG_PATH=$BUILD_DIR/AppDir/usr/lib/pkgconfig
-RUN ./configure --prefix="$BUILD_DIR/AppDir/usr"
+RUN ./configure --prefix="$BUILD_DIR/AppDir/usr" --enable-sixel
 RUN make -j4 && make install
 
 ## Create Appimage
